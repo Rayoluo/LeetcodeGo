@@ -25,24 +25,17 @@ type ListNode struct {
 
 // 迭代的方式
 func reverseList(head *ListNode) *ListNode {
-	if head == nil {
-		return nil
-	}
 	var (
-		hhead            *ListNode // 哨兵节点
-		lnode, cur, temp *ListNode
+		pre, cur, next *ListNode
 	)
-	hhead = &ListNode{Val: -1, Next: head}
-	cur = hhead.Next
-	lnode = hhead
+	cur = head
 	for cur != nil {
-		temp = cur.Next
-		cur.Next = lnode
-		lnode = cur
-		cur = temp
+		next = cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = next
 	}
-	head.Next = nil
-	return lnode
+	return pre
 }
 
 func main() {
